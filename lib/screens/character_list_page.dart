@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:breakingbadapp/screens/character_details.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../models/character.dart';
@@ -21,7 +22,8 @@ class _CharactersPageState extends State<CharactersPage> {
 
     setState(() {
       for (var i = 0; i < data.length; i++) {
-        if (i != 12) {
+        if (i != 12 && i != 13) {
+          //api kaynaginda sıkıntı oldugu icin bu elemanlari atlamak zorunda kaldim.
           Character k = Character();
           k.id = data[i]['char_id'];
           k.name = data[i]['name'];
@@ -59,14 +61,24 @@ class _CharactersPageState extends State<CharactersPage> {
           child: ListView.builder(
               itemCount: characterList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    characterList[index].name,
-                    style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20.0),
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage(characterList[index].img),
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => CharacterDetailsPage(
+                                  id: characterList[index].id,
+                                )));
+                  },
+                  child: ListTile(
+                    title: Text(
+                      characterList[index].name,
+                      style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20.0),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage: NetworkImage(characterList[index].img),
+                    ),
                   ),
                 );
               })),

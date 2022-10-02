@@ -20,8 +20,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
 
     var data = jsonDecode(res.body);
 
-    print(res.body);
-    
+    print(widget.id);
   }
 
   @override

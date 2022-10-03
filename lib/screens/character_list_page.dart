@@ -49,14 +49,21 @@ class _CharactersPageState extends State<CharactersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Karakter Listesi"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const CharacterDetailsPage(id: -1)));
+              },
+              icon: Icon(Icons.autorenew))
+        ],
+        title: const Text("Character List"),
       ),
       body: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Theme.of(context).backgroundColor, Theme.of(context).scaffoldBackgroundColor],
+                  colors: [Colors.green, Colors.indigo],
                   tileMode: TileMode.mirror)),
           child: ListView.builder(
               itemCount: characterList.length,
@@ -73,7 +80,7 @@ class _CharactersPageState extends State<CharactersPage> {
                   child: ListTile(
                     title: Text(
                       characterList[index].name,
-                      style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20.0),
+                      style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                     leading: CircleAvatar(
                       backgroundColor: Colors.grey,

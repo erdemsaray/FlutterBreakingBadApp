@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Breaking Bad',
         theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xFF67e6dc),
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(secondary: const Color(0xFFeb4d4b)),
+          scaffoldBackgroundColor: Color.fromARGB(255, 104, 142, 192),
+          colorScheme:
+              ColorScheme.fromSwatch(primarySwatch: Colors.indigo).copyWith(secondary: const Color(0xFFeb4d4b)),
           secondaryHeaderColor: const Color(0xFF222f3e),
           backgroundColor: const Color(0xFFfc5c65),
         ),

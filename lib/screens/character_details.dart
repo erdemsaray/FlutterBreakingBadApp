@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:breakingbadapp/models/character.dart';
 import 'package:breakingbadapp/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:image_fade/image_fade.dart';
 
 class CharacterDetailsPage extends StatefulWidget {
@@ -48,49 +48,67 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return yukleniyor == false
-        ? const Scaffold(
-            body: Center(
-              child: SpinKitDoubleBounce(
-                color: Colors.indigo,
-                size: 150.0,
+        ? Scaffold(
+            body: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [Color.fromARGB(255, 0, 0, 0), Colors.indigo],
+                      tileMode: TileMode.mirror)),
+              child: const Center(
+                child: SpinKitDoubleBounce(
+                  color: Colors.indigo,
+                  size: 150.0,
+                ),
               ),
             ),
           )
         : Scaffold(
+            extendBodyBehindAppBar: true,
             backgroundColor: const Color.fromARGB(255, 104, 142, 192),
             appBar: AppBar(
+              centerTitle: true,
+              elevation: 0,
+              backgroundColor: Colors.transparent,
               title: AnimatedTextKit(
                 animatedTexts: [WavyAnimatedText(k.name)],
                 repeatForever: true,
               ),
             ),
-            body: DefaultTextStyle(
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: ImageFade(
-                      height: 200,
-                      fit: BoxFit.cover,
-                      image: NetworkImage(k.img),
-                      duration: const Duration(seconds: 2),
-                      //curve: Curves.bounceInOut,
-                    ),
+            body: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [Color.fromARGB(255, 0, 0, 0), Colors.indigo],
+                      tileMode: TileMode.mirror)),
+              child: SafeArea(
+                child: DefaultTextStyle(
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: ImageFade(
+                          height: 200,
+                          fit: BoxFit.cover,
+                          image: NetworkImage(k.img),
+                          duration: const Duration(seconds: 2),
+                          //curve: Curves.bounceInOut,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30.0,
+                      ),
+                      CustomCard(title: 'Name:', value: k.name),
+                      CustomCard(title: 'Actor:', value: k.actor),
+                      CustomCard(title: 'BirthDate:', value: k.birthDate),
+                      CustomCard(title: 'Status:', value: k.status),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 30.0,
-                    width: 250.0,
-                    child: Divider(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  CustomCard(title: 'Name:', value: k.name),
-                  CustomCard(title: 'Actor:', value: k.actor),
-                  CustomCard(title: 'BirthDate:', value: k.birthDate),
-                  CustomCard(title: 'Status:', value: k.status),
-                ],
+                ),
               ),
             ),
           );

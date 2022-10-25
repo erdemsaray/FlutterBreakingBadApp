@@ -22,7 +22,7 @@ class _CharactersPageState extends State<CharactersPage> {
 
     setState(() {
       for (var i = 0; i < data.length; i++) {
-        if (i != 12 && i != 13) {
+        if (i != 12 && i != 13 && i != 16 && i != 17) {
           //api kaynaginda sıkıntı oldugu icin bu elemanlari atlamak zorunda kaldim.
           Character k = Character();
           k.id = data[i]['char_id'];
@@ -48,47 +48,53 @@ class _CharactersPageState extends State<CharactersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) => const CharacterDetailsPage(id: -1)));
               },
-              icon: Icon(Icons.autorenew))
+              icon: const Icon(Icons.autorenew))
         ],
         title: const Text("Character List"),
       ),
       body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.green, Colors.indigo],
+                  colors: [Color.fromARGB(255, 0, 0, 0), Colors.indigo],
                   tileMode: TileMode.mirror)),
-          child: ListView.builder(
-              itemCount: characterList.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => CharacterDetailsPage(
-                                  id: characterList[index].id,
-                                )));
-                  },
-                  child: ListTile(
-                    title: Text(
-                      characterList[index].name,
-                      style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+          child: SafeArea(
+            child: ListView.builder(
+                itemCount: characterList.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => CharacterDetailsPage(
+                                    id: characterList[index].id,
+                                  )));
+                    },
+                    child: ListTile(
+                      title: Text(
+                        characterList[index].name,
+                        style: const TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        backgroundImage: NetworkImage(characterList[index].img),
+                      ),
                     ),
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      backgroundImage: NetworkImage(characterList[index].img),
-                    ),
-                  ),
-                );
-              })),
+                  );
+                }),
+          )),
     );
   }
 }

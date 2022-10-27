@@ -2,9 +2,14 @@
 
 This project is a Flutter application that works with a Breaking Bad API. The user can instantly access information about different actors.
 
-## Screnshots
-<img src="screenshots/bb1.gif" height="600em" />
-<img src="screenshots/bb2.gif" height="600em" />
+<h3 align="left">Screnshots</h3>
+<p align="left"> 
+<a> 
+   <img src="screenshots/bb1.gif" alt="Screenshot1" height="600em"/> 
+  </a> 
+  <a> 
+   <img src="screenshots/bb2.gif" alt="Screenshot2" height="600em"/> 
+  </a> 
 
 
 ### Packages
